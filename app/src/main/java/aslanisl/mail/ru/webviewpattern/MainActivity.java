@@ -49,9 +49,9 @@ public class MainActivity extends AppCompatActivity {
                             webSettings.setJavaScriptEnabled(true);
 
                             if (response.equals("1")){
-                                webview.loadUrl("https://www.google.ru/");
+                                webview.loadUrl(getString(R.string.url));
                             } else {
-                                webview.loadUrl("https://www.yandex.ru/");
+                                webview.loadUrl("file:///android_asset/index.html");
                             }
                         }
                     }, failure -> {
