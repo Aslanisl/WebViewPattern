@@ -7,5 +7,6 @@
 
     <string name="internet_connected">Интернет подключен</string>
     <string name="internet_disconnected">Нет соединения с интернетом</string>
+    <string name="settings_internet">Перейти в настройки</string>
 
 </resources>

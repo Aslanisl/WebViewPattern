@@ -7,6 +7,7 @@ import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
@@ -38,12 +39,15 @@ public class LaunchActivity extends AppCompatActivity {
 
     @BindView(R.id.internet_status) TextView internetStatus;
     @BindView(R.id.loading) TextView loading;
+    @BindView(R.id.internet_settings) TextView internetSettings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launch);
         ButterKnife.bind(this);
+
+        internetSettings.setOnClickListener(this::startSettings);
 
         handler = new Handler();
         runnable = () -> {
@@ -55,15 +59,22 @@ public class LaunchActivity extends AppCompatActivity {
         registerReceiver(connectedReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
     }
 
+    private void startSettings(View view){
+        Intent intent = new Intent(Settings.ACTION_SETTINGS);
+        startActivity(intent);
+    }
+
     private void changeState(){
         if (currentState == State.CONNECTED) {
             internetStatus.setText(R.string.internet_connected);
             loading.setVisibility(View.VISIBLE);
             handler.postDelayed(runnable, 3 * 1000);
+            internetSettings.setVisibility(View.GONE);
         } else {
             internetStatus.setText(R.string.internet_disconnected);
-            loading.setVisibility(View.GONE);
+            loading.setVisibility(View.INVISIBLE);
             handler.removeCallbacks(runnable);
+            internetSettings.setVisibility(View.VISIBLE);
         }
     }
 
