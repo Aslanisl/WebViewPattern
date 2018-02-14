@@ -5,11 +5,11 @@
     android:layout_height="match_parent"
     tools:context="aslanisl.mail.ru.webviewpattern.MainActivity">
 
-    <WebView
+    <aslanisl.mail.ru.webviewpattern.JavaScriptWebView
         android:id="@+id/webview"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </WebView>
+    </aslanisl.mail.ru.webviewpattern.JavaScriptWebView>
 
 </FrameLayout>

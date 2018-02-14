@@ -2,25 +2,18 @@ package aslanisl.mail.ru.webviewpattern
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
-import android.webkit.WebChromeClient
-import android.webkit.WebView
-import android.webkit.WebViewClient
-import aslanisl.mail.ru.webviewpattern.utils.bind
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.activity_main.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
-
-    var call: Disposable? = null
-
-    private val webview by bind<WebView>(R.id.webview)
+class MainActivity : AppCompatActivity(), Callback<String> {
 
     private var response: String? = null
 
     @Inject lateinit var apiService: ApiService
+    private lateinit var call: Call<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,29 +22,26 @@ class MainActivity : AppCompatActivity() {
         App.getAppComponent().inject(this)
 
         if (savedInstanceState == null || response == null) {
-
             call = apiService.getData()
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe({ response ->
-                        if (response != null) {
-                            this.response = response
-
-                            webview.webViewClient = WebViewClient()
-                            webview.webChromeClient = WebChromeClient()
-                            val webSettings = webview.settings
-                            webSettings.javaScriptEnabled = true
-
-                            if (response.equals("1")) {
-                                webview.loadUrl(getString(R.string.url))
-                            } else {
-                                webview.loadUrl("file:///android_asset/index.html")
-                            }
-                        }
-                    }, { failure -> Log.d("TAG", failure.message) })
-
+            call.enqueue(this)
         } else {
             webview.restoreState(savedInstanceState)
+        }
+    }
+
+    override fun onFailure(call: Call<String>?, t: Throwable?) {
+        loadWebView(true)
+    }
+
+    override fun onResponse(call: Call<String>?, response: Response<String>?) {
+        loadWebView(response?.body()?.equals("0")?.not() ?: true)
+    }
+
+    private fun loadWebView(fromAssets: Boolean){
+        if (fromAssets) {
+            webview.loadUrl("file:///android_asset/index.html")
+        } else {
+            webview.loadUrl(getString(R.string.url))
         }
     }
 
@@ -70,6 +60,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        call?.dispose()
+        call?.cancel()
     }
 }
