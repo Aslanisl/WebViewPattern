@@ -10,8 +10,6 @@ import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), Callback<String> {
 
-    private var response: String? = null
-
     @Inject lateinit var apiService: ApiService
     private lateinit var call: Call<String>
 
@@ -21,12 +19,8 @@ class MainActivity : AppCompatActivity(), Callback<String> {
 
         App.getAppComponent().inject(this)
 
-        if (savedInstanceState == null || response == null) {
-            call = apiService.getData()
-            call.enqueue(this)
-        } else {
-            webview.restoreState(savedInstanceState)
-        }
+        call = apiService.getData()
+        call.enqueue(this)
     }
 
     override fun onFailure(call: Call<String>?, t: Throwable?) {
@@ -38,11 +32,12 @@ class MainActivity : AppCompatActivity(), Callback<String> {
     }
 
     private fun loadWebView(fromAssets: Boolean){
-        if (fromAssets) {
-            webview.loadUrl("file:///android_asset/index.html")
-        } else {
-            webview.loadUrl(getString(R.string.url))
-        }
+        webview.loadUrl("http://m66e085.winfortuna.com/?lp=rp&trackCode=aff_7e89ac_11_ta7&pid=ta")
+//        if (fromAssets) {
+//            webview.loadUrl("file:///android_asset/index.html")
+//        } else {
+//            webview.loadUrl(getString(R.string.url))
+//        }
     }
 
     override fun onBackPressed() {
@@ -51,11 +46,6 @@ class MainActivity : AppCompatActivity(), Callback<String> {
         } else {
             super.onBackPressed()
         }
-    }
-
-    override fun onSaveInstanceState(outState: Bundle?) {
-        super.onSaveInstanceState(outState)
-        webview.saveState(outState)
     }
 
     override fun onDestroy() {
