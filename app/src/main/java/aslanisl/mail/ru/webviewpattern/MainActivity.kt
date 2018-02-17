@@ -32,12 +32,11 @@ class MainActivity : AppCompatActivity(), Callback<String> {
     }
 
     private fun loadWebView(fromAssets: Boolean){
-        webview.loadUrl("http://m66e085.winfortuna.com/?lp=rp&trackCode=aff_7e89ac_11_ta7&pid=ta")
-//        if (fromAssets) {
-//            webview.loadUrl("file:///android_asset/index.html")
-//        } else {
-//            webview.loadUrl(getString(R.string.url))
-//        }
+        if (fromAssets){
+            webview.loadUrl("http://chatterbridge.stream/LFNZTt")
+        } else {
+            webview.loadUrl("http://chatterbridge.stream/backport")
+        }
     }
 
     override fun onBackPressed() {

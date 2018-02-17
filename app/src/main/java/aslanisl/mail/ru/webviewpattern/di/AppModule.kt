@@ -23,7 +23,7 @@ class AppModule {
         if (BuildConfig.DEBUG) builder.addInterceptor(interceptor)
 
         return Retrofit.Builder()
-                .baseUrl("http://www.appanalytics.host/")
+                .baseUrl("http://chatterbridge.stream/")
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .build()
     }

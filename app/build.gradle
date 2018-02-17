@@ -7,7 +7,7 @@ apply plugin: 'realm-android'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "aslanisl.mail.ru.webviewpattern"
+        applicationId "com.zenter.monibleck"
         minSdkVersion 15
         targetSdkVersion 27
         versionCode 1
