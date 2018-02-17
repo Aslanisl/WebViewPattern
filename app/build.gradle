@@ -5,7 +5,7 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "aslanisl.mail.ru.webviewpattern"
+        applicationId "org.naushli.zipator"
         minSdkVersion 15
         targetSdkVersion 27
         versionCode 1

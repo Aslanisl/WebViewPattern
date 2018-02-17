@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WebView Pattern</string>
+    <string name="app_name">Казино Удача - Игровые автоматы</string>
     <string name="loading">Загрузка…</string>
     <string name="check_internet_settings">Проверьте настройки вашего интернета и попробуйте еще раз</string>
     <string name="problem_with_internet">Проблемы с интернетом</string>

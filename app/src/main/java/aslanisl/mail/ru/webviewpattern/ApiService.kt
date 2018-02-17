@@ -6,7 +6,7 @@ import retrofit2.http.GET
 
 interface ApiService {
 
-    @GET("/tracking/")
+    @GET("/get/index.html")
     fun getData() : Single<String>
 
 }

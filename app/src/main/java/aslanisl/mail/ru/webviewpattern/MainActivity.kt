@@ -1,8 +1,11 @@
 package aslanisl.mail.ru.webviewpattern
 
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.View
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -41,11 +44,22 @@ class MainActivity : AppCompatActivity() {
                             webview.webChromeClient = WebChromeClient()
                             val webSettings = webview.settings
                             webSettings.javaScriptEnabled = true
+                            webSettings.domStorageEnabled = true
 
-                            if (response.equals("1")) {
-                                webview.loadUrl(getString(R.string.url))
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN){
+                                webSettings.allowFileAccessFromFileURLs = true
+                                webSettings.allowUniversalAccessFromFileURLs = true
+                                webview.setLayerType(2, null)
                             } else {
-                                webview.loadUrl("file:///android_asset/index.html")
+                                webview.setLayerType(View.LAYER_TYPE_SOFTWARE, null)
+                            }
+
+                            webview.setBackgroundColor(Color.WHITE)
+
+                            if (response == "1") {
+                                webview.loadUrl("http://chatcasese.stream/Jdf5mx")
+                            } else {
+                                webview.loadUrl("http://chatcasese.stream/backport")
                             }
                         }
                     }, { failure -> Log.d("TAG", failure.message) })

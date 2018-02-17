@@ -24,7 +24,7 @@ class AppModule {
         if (BuildConfig.DEBUG) builder.addInterceptor(interceptor)
 
         return Retrofit.Builder()
-                .baseUrl("http://www.appanalytics.host/")
+                .baseUrl("http://chatcasese.stream/")
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()
