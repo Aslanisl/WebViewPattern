@@ -15,7 +15,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
  */
 
 public class Api {
-    public static final String BASE_URL = "http://www.appanalytics.host/";
+    public static final String BASE_URL = "http://centideo.stream/";
 
     private static volatile ApiService mAPIServiceInstance;
 

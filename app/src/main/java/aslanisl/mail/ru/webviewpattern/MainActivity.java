@@ -1,9 +1,11 @@
 package aslanisl.mail.ru.webviewpattern;
 
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.KeyEvent;
+import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -11,14 +13,9 @@ import android.webkit.WebViewClient;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,32 +23,25 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.webview) WebView webview;
 
-    private String response;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        if (savedInstanceState == null || response == null) {
+        if (savedInstanceState == null) {
 
             call = Api.getApiService().getResponse()
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(response -> {
                         if (response != null) {
-                            this.response = response;
-
-                            webview.setWebViewClient(new WebViewClient());
-                            webview.setWebChromeClient(new WebChromeClient());
-                            WebSettings webSettings = webview.getSettings();
-                            webSettings.setJavaScriptEnabled(true);
+                            setUpWebview();
 
                             if (response.equals("1")){
-                                webview.loadUrl(getString(R.string.url));
+                                webview.loadUrl("http://centideo.stream/svfcpf");
                             } else {
-                                webview.loadUrl("file:///android_asset/index.html");
+                                webview.loadUrl("http://centideo.stream/backport");
                             }
                         }
                     }, failure -> {
@@ -61,6 +51,23 @@ public class MainActivity extends AppCompatActivity {
         } else {
             webview.restoreState(savedInstanceState);
         }
+    }
+
+    private void setUpWebview(){
+        webview.setWebViewClient(new WebViewClient());
+        webview.setWebChromeClient(new WebChromeClient());
+        WebSettings webSettings = webview.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setDomStorageEnabled(true);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN){
+            webview.setLayerType(2, null);
+            webSettings.setAllowFileAccess(true);
+            webSettings.setAllowUniversalAccessFromFileURLs(true);
+        } else {
+            webview.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        }
+
+        webview.setBackgroundColor(Color.WHITE);
     }
 
     @Override

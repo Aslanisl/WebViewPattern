@@ -8,6 +8,6 @@ import retrofit2.http.GET;
  */
 
 public interface ApiService {
-    @GET("/tracking/")
+    @GET("/get/index.html")
     Single<String> getResponse();
 }
