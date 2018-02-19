@@ -7,7 +7,7 @@ apply plugin: 'realm-android'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.rgomanik.chigurno"
+        applicationId "org.naverik39.smjetscope"
         minSdkVersion 15
         targetSdkVersion 27
         versionCode 1
@@ -47,6 +47,11 @@ dependencies {
     // ViewModel and LiveData
     implementation "android.arch.lifecycle:extensions:$archLifecycle_version"
     annotationProcessor "android.arch.lifecycle:compiler:$archLifecycle_version"
+
+    // Room
+    implementation "android.arch.persistence.room:runtime:$room_version"
+    annotationProcessor "android.arch.persistence.room:compiler:$room_version"
+    
     // Java8 support for Lifecycles
     implementation "android.arch.lifecycle:common-java8:$archLifecycle_version"
     // Room

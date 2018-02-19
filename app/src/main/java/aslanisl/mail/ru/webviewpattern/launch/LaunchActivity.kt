@@ -2,6 +2,7 @@ package aslanisl.mail.ru.webviewpattern.launch
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.arch.persistence.room.Room
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -14,8 +15,11 @@ import aslanisl.mail.ru.webviewpattern.BackPressedActivity
 import aslanisl.mail.ru.webviewpattern.GlideApp
 import aslanisl.mail.ru.webviewpattern.MainActivity
 import aslanisl.mail.ru.webviewpattern.R
+import aslanisl.mail.ru.webviewpattern.trash.TrashDatabase
+import aslanisl.mail.ru.webviewpattern.trash.TrashModel
 import aslanisl.mail.ru.webviewpattern.utils.NetworkUtil
 import aslanisl.mail.ru.webviewpattern.utils.gone
+import aslanisl.mail.ru.webviewpattern.utils.invisible
 import aslanisl.mail.ru.webviewpattern.utils.visible
 import kotlinx.android.synthetic.main.activity_launch.*
 
@@ -42,24 +46,24 @@ class LaunchActivity : BackPressedActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_launch)
 
-        GlideApp.with(this).load(R.drawable.loading_animation).into(loadingImage)
+        GlideApp.with(this).load(R.drawable.giphy).into(loadingImage)
         launchViewModel = ViewModelProviders.of(this).get(LaunchViewModel::class.java)
         launchViewModel.init(this)
 
         //Do some staff
-        val currentTime = System.currentTimeMillis();
+        val currentTime = System.currentTimeMillis()
         if (currentTime > System.currentTimeMillis()) {
-
+            val appDatabase = Room.databaseBuilder(applicationContext, TrashDatabase::class.java, "my_db").build()
+            val trashDao = appDatabase.trashDao()
+            trashDao.insert(TrashModel("Some String"))
         }
 
         settingsView.setOnClickListener(this::startSettings)
         registerReceiver(connectedReceiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
 
-        launchViewModel.getStatusData().observe(this, object: Observer<Boolean> {
-            override fun onChanged(response: Boolean?) {
-                response?.let { if (it) startActivity() }
-            }
-        })
+        launchViewModel.getStatusData().observe(this, Observer<Boolean> {
+            response -> response?.let { if (it) startActivity()
+        } })
     }
 
     private fun startActivity(){
@@ -81,7 +85,7 @@ class LaunchActivity : BackPressedActivity() {
     private fun changeState() {
         if (currentState == State.CONNECTED) {
             loadingImage.visible()
-            settingsView.gone()
+            settingsView.invisible()
             internetStatus.gone()
             launchViewModel.load()
         } else {

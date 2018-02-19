@@ -1,12 +1,17 @@
 package aslanisl.mail.ru.webviewpattern
 
 import android.os.Bundle
+import android.widget.Toast
+import aslanisl.mail.ru.webviewpattern.utils.gone
+import aslanisl.mail.ru.webviewpattern.utils.showShort
+import aslanisl.mail.ru.webviewpattern.utils.visible
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BackPressedActivity() {
 
     private lateinit var webView: JavaScriptWebView
 
-    private val url = "http://chatlounge.stream/glsr5lsf"
+    private val url = "http://coinbugg.win/dl20dlDgsl"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -14,7 +19,18 @@ class MainActivity : BackPressedActivity() {
 
         webView = findViewById(R.id.webview)
         webView.setupWebview()
-        webView.listener = { webView.loadUrl(url) }
+        tryAgain.setOnClickListener { loadWebview() }
+        webView.listener = {
+            tryAgain.visible()
+            webView.gone()
+            Toast(this).showShort(this, R.string.load_again_error)
+        }
+        loadWebview()
+    }
+
+    private fun loadWebview(){
+        tryAgain.gone()
+        webView.visible()
         webView.loadUrl(url)
     }
 
