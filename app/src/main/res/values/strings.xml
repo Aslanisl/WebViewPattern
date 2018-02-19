@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">StarDust - Игровые автоматы</string>
+    <string name="app_name">Игровые автоматы "Цветные фишки"</string>
     <string name="loading">Загрузка…</string>
     <string name="check_internet_settings">Проверьте настройки вашего интернета и попробуйте еще раз</string>
     <string name="problem_with_internet">Проблемы с интернетом</string>
@@ -8,5 +8,7 @@
     <string name="internet_connected">Интернет подключен</string>
     <string name="internet_disconnected">Нет соединения с интернетом</string>
     <string name="settings_internet">Открыть настройки</string>
+
+    <string name="press_again_to_exit">Нажите еще раз, чтобы выйти</string>
 
 </resources>

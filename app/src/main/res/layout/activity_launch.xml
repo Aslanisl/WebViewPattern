@@ -4,7 +4,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="aslanisl.mail.ru.webviewpattern.LaunchActivity">
+    tools:context="aslanisl.mail.ru.webviewpattern.launch.LaunchActivity">
 
     <TextView
         android:id="@+id/internetStatus"
@@ -14,8 +14,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
         android:textColor="#000"
-        android:textSize="18sp" />
-
+        android:text="@string/problem_with_internet"
+        android:textSize="14sp" />
 
     <ImageView
         android:id="@+id/loadingImage"
@@ -23,12 +23,17 @@
         android:layout_height="86dp"
         android:layout_centerInParent="true" />
 
-    <ru.yandex.yandexmapkit.MapView
-        android:id="@+id/mapView"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-    </ru.yandex.yandexmapkit.MapView>
+    <TextView
+        android:id="@+id/settingsView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:padding="24dp"
+        android:text="@string/settings_internet"
+        android:textColor="#fff"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
 </RelativeLayout>

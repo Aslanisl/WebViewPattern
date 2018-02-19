@@ -7,7 +7,7 @@ apply plugin: 'realm-android'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.zenter.monibleck"
+        applicationId "com.rgomanik.chigurno"
         minSdkVersion 15
         targetSdkVersion 27
         versionCode 1
@@ -38,31 +38,20 @@ dependencies {
     implementation "com.android.support:design:$supportVersion"
     implementation "com.android.support:support-v4:$supportVersion"
 
-    //Retrofit 2
-    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.5.0'
-    implementation 'com.squareup.retrofit2:converter-scalars:2.3.0'
-
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.2.21"
-
-    //Material drawer
-    implementation("com.mikepenz:materialdrawer:6.0.2@aar") {
-        transitive = true
-    }
-
-    implementation 'ru.yandex:yandexmapkit:2.5.4@aar'
 
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.4.0'
     kapt 'com.github.bumptech.glide:compiler:4.4.0'
 
-    //Dagger
-    implementation "com.google.dagger:dagger:2.14.1"
-    kapt "com.google.dagger:dagger-compiler:2.14.1"
-
-    implementation "com.j256.ormlite:ormlite-core:5.0"
-    implementation "com.j256.ormlite:ormlite-android:5.0"
+    // ViewModel and LiveData
+    implementation "android.arch.lifecycle:extensions:$archLifecycle_version"
+    annotationProcessor "android.arch.lifecycle:compiler:$archLifecycle_version"
+    // Java8 support for Lifecycles
+    implementation "android.arch.lifecycle:common-java8:$archLifecycle_version"
+    // Room
+    implementation "android.arch.persistence.room:runtime:$room_version"
+    annotationProcessor "android.arch.persistence.room:compiler:$room_version"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'

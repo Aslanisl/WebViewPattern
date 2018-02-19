@@ -3,11 +3,8 @@ package aslanisl.mail.ru.webviewpattern
 import android.content.Context
 import android.graphics.Color
 import android.os.Build
-import android.support.annotation.AttrRes
 import android.util.AttributeSet
-import android.webkit.WebChromeClient
-import android.webkit.WebView
-import android.webkit.WebViewClient
+import android.webkit.*
 
 class  JavaScriptWebView : WebView {
 
@@ -15,8 +12,15 @@ class  JavaScriptWebView : WebView {
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
-    init {
-        webViewClient = WebViewClient()
+    var listener: (() -> Unit)? = null
+
+    fun setupWebview(){
+        webViewClient = object : WebViewClient(){
+            override fun onReceivedError(view: WebView?, request: WebResourceRequest?, error: WebResourceError?) {
+                super.onReceivedError(view, request, error)
+                listener?.invoke()
+            }
+        }
         webChromeClient = WebChromeClient()
         settings.javaScriptEnabled = true
         settings.domStorageEnabled = true
