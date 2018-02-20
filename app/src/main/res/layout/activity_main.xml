@@ -13,17 +13,4 @@
 
     </aslanisl.mail.ru.webviewpattern.JavaScriptWebView>
 
-    <TextView
-        android:id="@+id/tryAgain"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="32dp"
-        android:background="@color/colorPrimary"
-        android:gravity="center"
-        android:padding="24dp"
-        android:text="@string/load_again"
-        android:textColor="#fff"
-        android:visibility="gone"/>
-
 </FrameLayout>
