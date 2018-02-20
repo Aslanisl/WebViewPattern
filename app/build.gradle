@@ -44,6 +44,10 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.4.0'
     kapt 'com.github.bumptech.glide:compiler:4.4.0'
 
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+
+    implementation 'com.facebook.fresco:fresco:1.8.1'
+
     // ViewModel and LiveData
     implementation "android.arch.lifecycle:extensions:$archLifecycle_version"
     annotationProcessor "android.arch.lifecycle:compiler:$archLifecycle_version"
@@ -51,12 +55,20 @@ dependencies {
     // Room
     implementation "android.arch.persistence.room:runtime:$room_version"
     annotationProcessor "android.arch.persistence.room:compiler:$room_version"
-    
+
     // Java8 support for Lifecycles
     implementation "android.arch.lifecycle:common-java8:$archLifecycle_version"
-    // Room
-    implementation "android.arch.persistence.room:runtime:$room_version"
-    annotationProcessor "android.arch.persistence.room:compiler:$room_version"
+
+    //Yandex metrica
+    implementation 'com.yandex.android:mobmetricalib:2.80'
+
+    //Leak memory monitoring
+    implementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+
+    //Binary preferense
+    implementation "com.github.iamironz:binaryprefs:1.0.0-BETA-2"
+
+    implementation 'com.shuhart.stepview:stepview:1.2.4'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'

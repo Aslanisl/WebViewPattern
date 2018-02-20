@@ -1,41 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="aslanisl.mail.ru.webviewpattern.launch.LaunchActivity">
-
-    <TextView
-        android:id="@+id/internetStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:textColor="#000"
-        android:text="@string/problem_with_internet"
-        android:textSize="14sp" />
+    android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/loadingImage"
         android:layout_width="104dp"
         android:layout_height="104dp"
-        android:layout_above="@+id/settingsView"
-        android:layout_marginBottom="24dp"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="24dp"/>
 
     <TextView
         android:id="@+id/settingsView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="24dp"
         android:background="@color/colorPrimary"
         android:gravity="center"
         android:padding="24dp"
         android:text="@string/settings_internet"
         android:textColor="#fff"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/internetStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/settingsView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/problem_with_internet"
+        android:textColor="#000"
+        android:textSize="14sp"/>
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/frescoImage"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:visibility="gone"/>
 
 </RelativeLayout>
