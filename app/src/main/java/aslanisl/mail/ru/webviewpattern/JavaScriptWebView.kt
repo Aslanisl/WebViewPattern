@@ -12,15 +12,8 @@ class  JavaScriptWebView : WebView {
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
-    var listener: (() -> Unit)? = null
-
     fun setupWebview(){
-        webViewClient = object : WebViewClient(){
-            override fun onReceivedError(view: WebView?, request: WebResourceRequest?, error: WebResourceError?) {
-                super.onReceivedError(view, request, error)
-                listener?.invoke()
-            }
-        }
+        webViewClient = WebViewClient()
         webChromeClient = WebChromeClient()
         settings.javaScriptEnabled = true
         settings.domStorageEnabled = true

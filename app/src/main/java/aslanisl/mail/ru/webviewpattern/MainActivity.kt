@@ -14,7 +14,6 @@ class MainActivity : BackPressedActivity() {
 
         webView = findViewById(R.id.webview)
         webView.setupWebview()
-        webView.listener = { webView.loadUrl(url) }
         webView.loadUrl(url)
     }
 
