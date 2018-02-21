@@ -7,7 +7,7 @@ apply plugin: 'realm-android'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "org.naverik39.smjetscope"
+        applicationId "com.arfogliid.stracofe"
         minSdkVersion 15
         targetSdkVersion 27
         versionCode 1

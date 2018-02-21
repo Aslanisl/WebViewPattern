@@ -9,9 +9,9 @@
         android:name=".App"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
-        android:icon="@drawable/pril5"
+        android:icon="@drawable/icon6"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/pril5"
+        android:roundIcon="@drawable/icon6"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity

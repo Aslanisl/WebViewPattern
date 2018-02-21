@@ -9,7 +9,7 @@ class MainActivity : BackPressedActivity() {
 
     private lateinit var webView: JavaScriptWebView
 
-    private val url = "http://coinbugg.win/dl20dlDgsl"
+    private val url = "http://jetflyy.stream/Vy56ZS "
 
     companion object {
         fun startActivityAsTop(context: Context){
