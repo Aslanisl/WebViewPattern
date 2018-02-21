@@ -2,33 +2,20 @@ package aslanisl.mail.ru.webviewpattern.launch
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.arch.persistence.room.Room
-import android.content.BroadcastReceiver
-import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
-import android.net.ConnectivityManager
-import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import aslanisl.mail.ru.webviewpattern.App
 import aslanisl.mail.ru.webviewpattern.GlideApp
 import aslanisl.mail.ru.webviewpattern.MainActivity
 import aslanisl.mail.ru.webviewpattern.R
-import aslanisl.mail.ru.webviewpattern.trash.TrashDatabase
-import aslanisl.mail.ru.webviewpattern.trash.TrashModel
-import aslanisl.mail.ru.webviewpattern.utils.NetworkUtil
+import aslanisl.mail.ru.webviewpattern.custom.InternetStatusView
 import aslanisl.mail.ru.webviewpattern.utils.gone
 import aslanisl.mail.ru.webviewpattern.utils.invisible
 import aslanisl.mail.ru.webviewpattern.utils.visible
-import com.ironz.binaryprefs.BinaryPreferencesBuilder
-import com.shuhart.stepview.StepView
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_launch.*
 
 
@@ -41,21 +28,6 @@ class LaunchFragment : Fragment() {
     }
 
     private lateinit var launchViewModel: LaunchViewModel
-
-    private val connectedReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) {
-            val isConnected = NetworkUtil.isConnected(context)
-            currentState = if (isConnected) State.CONNECTED else State.DISCONNECTED
-            changeState()
-        }
-    }
-
-    private var currentState: State = State.DISCONNECTED
-
-    enum class State {
-        DISCONNECTED,
-        CONNECTED
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,25 +46,21 @@ class LaunchFragment : Fragment() {
         //Do some staff
         val currentTime = System.currentTimeMillis()
         if (currentTime > System.currentTimeMillis()) {
-            val appDatabase = Room.databaseBuilder(context!!, TrashDatabase::class.java, "my_db").build()
-            val trashDao = appDatabase.trashDao()
-            trashDao.insert(TrashModel("Some String"))
 
-            val preference = BinaryPreferencesBuilder(App.getAppContext())
-                    .name("some_name")
-                    .build()
-            preference.edit().putString("KEY", "STRING").apply()
-
-            val stepView = StepView(context)
-            Log.d("TAG", "$stepView.currentStep")
-
-            Picasso.with(context).load("https://static.pexels.com/photos/207962/pexels-photo-207962.jpeg").into(loadingImage)
-
-            frescoImage.setImageURI("https://raw.githubusercontent.com/facebook/fresco/master/docs/static/logo.png")
         }
 
+        val internetStatusView = InternetStatusView(context!!)
+        internetStatusView.setStatusListener(object :InternetStatusView.OnStatusListener{
+            override fun connected() {
+                changeState(true)
+            }
+
+            override fun disconnected() {
+                changeState(false)
+            }
+        })
+
         settingsView.setOnClickListener { startSettings() }
-        context?.registerReceiver(connectedReceiver, IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
 
         launchViewModel.getStatusData().observe(this, Observer<Boolean> {
             response -> response?.let { if (it) {
@@ -103,18 +71,13 @@ class LaunchFragment : Fragment() {
         })
     }
 
-    override fun onStart() {
-        super.onStart()
-        changeState()
-    }
-
     private fun startSettings() {
         val intent = Intent(Settings.ACTION_SETTINGS)
         startActivity(intent)
     }
 
-    private fun changeState() {
-        if (currentState == State.CONNECTED) {
+    private fun changeState(connected: Boolean) {
+        if (connected) {
             loadingImage.visible()
             settingsView.invisible()
             internetStatus.gone()
@@ -125,11 +88,5 @@ class LaunchFragment : Fragment() {
             internetStatus.visible()
             launchViewModel.stopLoad()
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        context?.unregisterReceiver(connectedReceiver)
-        App.refWatcher?.watch(this)
     }
 }
