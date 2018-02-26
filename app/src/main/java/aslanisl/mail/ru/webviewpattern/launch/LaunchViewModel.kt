@@ -3,7 +3,7 @@ package aslanisl.mail.ru.webviewpattern.launch
 import android.arch.lifecycle.*
 import android.os.Handler
 
-const val LOADING_TIME = 3 * 1000L
+const val LOADING_TIME = 2 * 1000L
 
 class LaunchViewModel() : ViewModel(), LifecycleObserver{
 

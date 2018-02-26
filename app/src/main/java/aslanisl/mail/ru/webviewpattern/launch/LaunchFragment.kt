@@ -18,7 +18,6 @@ import aslanisl.mail.ru.webviewpattern.utils.invisible
 import aslanisl.mail.ru.webviewpattern.utils.visible
 import kotlinx.android.synthetic.main.fragment_launch.*
 
-
 class LaunchFragment : Fragment() {
 
     companion object {
@@ -36,19 +35,6 @@ class LaunchFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_launch, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        GlideApp.with(context).load(R.drawable.loader).into(loadingImage)
-
-        //Do some staff
-        val currentTime = System.currentTimeMillis()
-        if (currentTime > System.currentTimeMillis()) {
-
-        }
-
         val internetStatusView = InternetStatusView(context!!)
         internetStatusView.setStatusListener(object :InternetStatusView.OnStatusListener{
             override fun connected() {
@@ -59,6 +45,19 @@ class LaunchFragment : Fragment() {
                 changeState(false)
             }
         })
+
+        return inflater.inflate(R.layout.fragment_launch, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        GlideApp.with(context).load(R.drawable.loading_gi).into(loadingImage)
+
+        //Do some staff
+        val currentTime = System.currentTimeMillis()
+        if (currentTime > System.currentTimeMillis()) {
+
+        }
 
         settingsView.setOnClickListener { startSettings() }
 
