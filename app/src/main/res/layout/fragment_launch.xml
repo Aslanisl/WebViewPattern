@@ -36,4 +36,9 @@
         android:textColor="#000"
         android:textSize="14sp" />
 
+    <aslanisl.mail.ru.webviewpattern.custom.InternetStatusView
+        android:id="@+id/internetStatusView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
 </RelativeLayout>

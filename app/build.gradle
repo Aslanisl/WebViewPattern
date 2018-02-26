@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'realm-android'
+apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 27
@@ -52,6 +53,11 @@ dependencies {
 
     //Yandex metrica
     implementation 'com.yandex.android:mobmetricalib:2.80'
+
+    //Some libraries
+    implementation "de.adorsys.android:finger:0.0.8"
+    implementation 'de.blox.treeview:treeview:0.0.3'
+    implementation 'com.gdacciaro:iosdialog:1.0.3'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'

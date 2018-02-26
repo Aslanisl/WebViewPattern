@@ -41,8 +41,8 @@ class MainFragment : Fragment() {
     fun finishFragment() : Boolean {
         if (webView.canGoBack()) {
             webView.goBack()
-            return true
+            return false
         }
-        return false
+        return true
     }
 }

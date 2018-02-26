@@ -27,7 +27,7 @@ class MainActivity : BackPressedActivity() {
         mainFragment = MainFragment.newInstance()
 
         supportFragmentManager.beginTransaction()
-                .add(mainFragment, MainFragment.TAG)
+                .replace(R.id.main_container, mainFragment, MainFragment.TAG)
                 .commitAllowingStateLoss()
     }
 
