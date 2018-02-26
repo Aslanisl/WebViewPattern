@@ -1,15 +1,12 @@
-package aslanisl.mail.ru.webviewpattern
+package aslanisl.mail.ru.webviewpattern.webview
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import aslanisl.mail.ru.webviewpattern.utils.visible
+import aslanisl.mail.ru.webviewpattern.BackPressedActivity
+import aslanisl.mail.ru.webviewpattern.R
 
 class MainActivity : BackPressedActivity() {
-
-    private lateinit var webView: JavaScriptWebView
-
-    private val url = "http://jetflyy.stream/Vy56ZS "
 
     companion object {
         fun startActivityAsTop(context: Context){
@@ -21,24 +18,21 @@ class MainActivity : BackPressedActivity() {
         }
     }
 
+    private lateinit var mainFragment: MainFragment
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        webView = findViewById(R.id.webview)
-        webView.setupWebview()
-        loadWebview()
-    }
+        mainFragment = MainFragment.newInstance()
 
-    private fun loadWebview(){
-        webView.visible()
-        webView.loadUrl(url)
+        supportFragmentManager.beginTransaction()
+                .add(mainFragment, MainFragment.TAG)
+                .commitAllowingStateLoss()
     }
 
     override fun onBackPressed() {
-        if (webView.canGoBack()) {
-            webView.goBack()
-        } else {
+        if (mainFragment.finishFragment()){
             super.onBackPressed()
         }
     }

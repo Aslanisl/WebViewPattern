@@ -10,13 +10,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import aslanisl.mail.ru.webviewpattern.GlideApp
-import aslanisl.mail.ru.webviewpattern.MainActivity
+import aslanisl.mail.ru.webviewpattern.webview.MainActivity
 import aslanisl.mail.ru.webviewpattern.R
 import aslanisl.mail.ru.webviewpattern.custom.InternetStatusView
 import aslanisl.mail.ru.webviewpattern.utils.gone
 import aslanisl.mail.ru.webviewpattern.utils.invisible
 import aslanisl.mail.ru.webviewpattern.utils.visible
-import kotlinx.android.synthetic.main.activity_launch.*
+import kotlinx.android.synthetic.main.fragment_launch.*
 
 
 class LaunchFragment : Fragment() {
@@ -36,7 +36,7 @@ class LaunchFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.activity_launch, container, false)
+        return inflater.inflate(R.layout.fragment_launch, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

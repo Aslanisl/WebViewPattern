@@ -7,7 +7,7 @@ apply plugin: 'realm-android'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.arfogliid.stracofe"
+        applicationId "org.potofonex.klementy"
         minSdkVersion 15
         targetSdkVersion 27
         versionCode 1

@@ -40,10 +40,4 @@
         android:textColor="#000"
         android:textSize="14sp"/>
 
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/frescoImage"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:visibility="gone"/>
-
 </RelativeLayout>
